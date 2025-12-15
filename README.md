@@ -1,7 +1,5 @@
 # MiniOS - Mini Operating System Simulator
 
-#### Video Demo: <URL HERE>
-
 #### Description:
 
 MiniOS is a mini operating system simulator. I built it to understand how operating systems actually work instead of just reading about them in theory. It has process management, file systems, user authentication, and logging.
@@ -77,4 +75,5 @@ The hard parts were:
 ## Files
 
 - `miniOS.py` - Main code
+
 - `test_miniOS.py` - Tests
