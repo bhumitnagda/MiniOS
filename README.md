@@ -8,13 +8,13 @@ MiniOS is a mini operating system simulator. I built it to understand how operat
 
 **Logger**: Keeps a record of everything that happens in the system. Every action gets a level (INFO, WARN, ERROR, DEBUG) and a message. Pretty straightforward.
 
-**ProcessManager**: Creates and manages processes. Uses a simple Round Robin algorithm: each process gets a turn in the queue, runs, then goes back to the end. Fair scheduling basically.
+**ProcessManager**: Creates and manages processes. Uses a simple Round Robin algorithm: each process gets a turn in the queue, runs, then goes back to the end. Fair scheduling, basically.
 
-**FileSystem**: You can create, read, write, delete files. Files are stored in a dictionary with content, owner, and creation time. Only the owner or root can change or delete files. Had to enforce this to avoid breaking permissions.
+**FileSystem**: You can create, read, write, and  delete files. Files are stored in a dictionary with content, owner, and creation time. Only the owner or root can change or delete files. Had to enforce this to avoid breaking permissions.
 
-**UserManager**: Handles user login and passwords. Root user exists by default and has special permissions. Only root can create users or view logs.
+**UserManager**: Handles user login and passwords. Root user exists by default and has special permissions. Only the root can create users or view logs.
 
-**Shell**: The command interface. Has 16 commands that let you actually interact with the system. Parses commands, handles quoted arguments, sends them to the right handler.
+**Shell**: The command interface. Has 16 commands that let you actually interact with the system. Parses commands, handles quoted arguments, and sends them to the right handler.
 
 **MiniOS**: Ties everything together. Boots the system, manages who's logged in, handles shutdown.
 
@@ -58,22 +58,23 @@ Then use commands:
 
 ## What I Learned
 
-Building this from scratch was actually useful. You can read about how operating systems work all you want, but actually coding it is different.
-
 The hard parts were:
 
 - **Sharing the Logger across everything**: All components needed access to the same logger so logs didn't get scattered everywhere. Had to think about how to pass it around properly.
 
-- **The scheduler**: Implementing Round Robin sounds simple on paper. You take from the front, run it, put it at the back. But handling process termination, checking if a process still exists, keeping the queue in sync, that's where the bugs came from.
+- **The scheduler**: Implementing Round Robin sounds simple on paper. You take from the front, run it, and put it at the back. But handling process termination, checking if a process still exists, and keeping the queue in sync.
 
 - **File permissions**: Keeping track of who owns what and stopping users from accessing files they shouldn't. Had to check ownership every single time someone tried to modify a file.
 
 - **Command parsing**: Handling quoted strings like `create "my file.txt" "hello world"` where spaces shouldn't split the arguments. The parser had to track whether you're inside quotes or not.
 
-- **Error handling**: Making sure that when something goes wrong, the system tells the user what happened and keeps running. Can't have it crash because a user typed something wrong.
+- **Error handling**: Making sure that when something goes wrong, the system tells the user what happened and keeps running. 
 
 ## Files
 
 - `miniOS.py` - Main code
 
 - `test_miniOS.py` - Tests
+<img width="862" height="978" alt="Screenshot 2025-12-15 124002" src="https://github.com/user-attachments/assets/4d800ce7-8dc7-41f5-802d-089f242c3e83" />
+
+
